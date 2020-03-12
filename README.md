@@ -9,3 +9,7 @@ Attempt to learn Django/Python and make it do something interesting
 ## Tutorial
 
 <https://pythonprogramming.net/django-web-development-python-tutorial/>
+
+## Starting Postgres
+
+docker-compose -f docker-compose.yml up --build

@@ -31,8 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-'tinymce',
-'main.apps.MainConfig',
+    'tinymce',
+    'main.apps.MainConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -148,4 +148,4 @@ TINYMCE_DEFAULT_CONFIG = {
     'contextmenu': 'formats | link image',
     'menubar': True,
     'statusbar': True,
-    }
+}
