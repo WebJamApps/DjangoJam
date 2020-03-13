@@ -9,6 +9,12 @@ verify_ssl = true
 django = "*"
 django-tinymce4-lite = "*"
 isort = "*"
+python-dotenv = "*"
+dj-database-url = "*"
+gunicorn = "*"
+postgres = "*"
+pytz = "*"
+whitenoise = "*"
 
 [requires]
 python_version = "3.8"

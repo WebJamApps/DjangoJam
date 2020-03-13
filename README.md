@@ -13,3 +13,17 @@ Attempt to learn Django/Python and make it do something interesting
 ## Starting Postgres
 
 docker-compose -f docker-compose.yml up --build
+
+### Basic Django/Python Commands
+
+-   To install a new package, `pipenv install <package-name>`
+-   pipenv shell
+-   pipenv sync
+-   python3.8 manage.py runserver
+
+### psycopg2
+
+This is the python adapter for Postgresql
+
+-   If using Windows or Mac, it can be installed with pipenv install
+-   if using Ubuntu, run ``
