@@ -10,9 +10,9 @@ Attempt to learn Django/Python and make it do something interesting
 
 <https://pythonprogramming.net/django-web-development-python-tutorial/>
 
-## Starting Postgres
+## Starting Postgresql
 
-docker-compose -f docker-compose.yml up --build
+`docker-compose -f docker-compose.yml up --build`
 
 ### Basic Django/Python Commands
 
@@ -26,4 +26,4 @@ docker-compose -f docker-compose.yml up --build
 This is the python adapter for Postgresql
 
 -   If using Windows or Mac, it can be installed with pipenv install
--   if using Ubuntu, run ``
+-   if using Ubuntu, run `sudo apt-get install python-psycopg2`

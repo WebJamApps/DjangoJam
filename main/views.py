@@ -1,10 +1,18 @@
 from django.shortcuts import render, redirect
-from .models import Tutorial
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
+from rest_framework import viewsets
 
-
+from .serializers import TutorialSerializer
+from .models import Tutorial
 # Create your views here.
+
+
+class TutorialViewSet(viewsets.ModelViewSet):
+    queryset = Tutorial.objects.all().order_by('tutorial_title')
+    serializer_class = TutorialSerializer
+
+
 def homepage(request):
     return render(request=request,
                   template_name='main/home.html',
