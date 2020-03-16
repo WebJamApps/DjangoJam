@@ -10,9 +10,48 @@
   <!-- Load js for initializing tables via their server-side options -->
   <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
   <script>
-    var cl = function(action, row) {
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+          function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+                }
+              }
+            }
+            return cookieValue;
+          }
+          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+            // Only send the token to relative URLs i.e. locally.
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+          }
+        }
+      }
+    });
+    var callback = function() {
+      console.log('deleted successfully')
+    }
+    var errorCallback = function() {
+      console.log('delete failed')
+    }
+    var cl = function(action, dataId) {
       console.log(action);
-      console.log(row);
+      console.log(dataId);
+      if (action === 'delete') {
+        $.ajax({
+          url: 'http://localhost:8000/tutorials/' + `${dataId}`,
+          type: 'DELETE',
+          success: callback || $.noop,
+          error: errorCallback || $.noop
+        });
+      }
     }
 
   </script>
@@ -39,7 +78,7 @@
   <script>
     var tr = document.getElementsByTagName("TR")[0].innerHTML;
     tr = tr + '<th><strong>Modify</strong></th>';
-    console.log(tr);
+    // console.log(tr);
     document.getElementsByTagName("TR")[0].innerHTML = tr;
 
   </script>
