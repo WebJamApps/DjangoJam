@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'datatableview',
     'rest_framework',
     'tinymce',
     'main.apps.MainConfig',

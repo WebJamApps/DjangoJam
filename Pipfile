@@ -17,6 +17,9 @@ pytz = "*"
 whitenoise = "*"
 djangorestframework = "*"
 pylama = "*"
+django-datatables-view = "*"
+python-dateutil = "*"
+django-datatable-view = "*"
 
 [requires]
 python_version = "3.8"
