@@ -1,17 +1,41 @@
 {% load static %}
-<!-- Load dependencies -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<html>
 
-<!-- Load js for initializing tables via their server-side options -->
-<script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
-<script type="text/javascript">
-  $(function() {
-    datatableview.initialize($('.datatable'));
-  });
+<head>
+  <!-- Load dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-</script>
+  <!-- Load js for initializing tables via their server-side options -->
+  <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
+  <script type="text/javascript">
+    $(function() {
+      datatableview.initialize($('.datatable'), {
+        "columnDefs": [{
+          // The `data` parameter refers to the data for the cell.
+          // The `rows`argument is an object representing all the data for the current row.
+          "render": function(data, type, row) {
+            return "<button class='btn-edit'>Edit</button> | <button class='btn-delete'>Delete</button>";
+          },
+          "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
+        }]
+      });
+    });
 
-<!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
-{{ datatable }}
+  </script>
+</head>
+
+<body>
+  <!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
+  {{ datatable }}
+  <script>
+    var tr = document.getElementsByTagName("TR")[0].innerHTML;
+    tr = tr + '<th><strong>Modify</strong></th>';
+    console.log(tr);
+    document.getElementsByTagName("TR")[0].innerHTML = tr;
+
+  </script>
+</body>
+
+</html>
