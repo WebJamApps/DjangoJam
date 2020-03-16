@@ -9,6 +9,13 @@
 
   <!-- Load js for initializing tables via their server-side options -->
   <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
+  <script>
+    var cl = function(action, row) {
+      console.log(action);
+      console.log(row);
+    }
+
+  </script>
   <script type="text/javascript">
     $(function() {
       datatableview.initialize($('.datatable'), {
@@ -16,7 +23,7 @@
           // The `data` parameter refers to the data for the cell.
           // The `rows`argument is an object representing all the data for the current row.
           "render": function(data, type, row) {
-            return "<button class='btn-edit'>Edit</button> | <button class='btn-delete'>Delete</button>";
+            return "<button onclick='cl(\"edit\"," + row[0] + ");' class='btn-edit'>Edit</button > | <button class='btn-delete' onclick='cl(\"delete\"," + row[0] + ");'>Delete</button>";
           },
           "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
         }]

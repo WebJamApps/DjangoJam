@@ -2,7 +2,6 @@ from django.urls import include, path
 # from django.conf.urls import url
 from rest_framework import routers
 from . import views
-from . import OrderListJson
 router = routers.DefaultRouter()
 router.register(r'tutorials', views.TutorialViewSet)
 app_name = 'main'  # here for namespacing of urls.
