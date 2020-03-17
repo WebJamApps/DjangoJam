@@ -53,8 +53,14 @@
 </head>
 
 <body>
-  <!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
-  {{ datatable }}
+  <div class="col s12 m6">
+    <div class="card hoverable">
+      <div class="card-content">
+        <!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
+        {{ datatable }}
+      </div>
+    </div>
+  </div>
   <script>
     var tr = document.getElementsByTagName("TR")[0].innerHTML;
     tr = tr + '<th><strong>Modify</strong></th>';

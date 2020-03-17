@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from datatableview.views import DatatableView
 from .serializers import TutorialSerializer
 from .models import Tutorial
+from .forms import PostForm
 # Create your views here.
 
 
@@ -15,6 +16,11 @@ class ZeroConfigurationDatatableView(DatatableView):
 class TutorialViewSet(viewsets.ModelViewSet):
     queryset = Tutorial.objects.all().order_by('tutorial_title')
     serializer_class = TutorialSerializer
+
+
+def post_new(request):
+    form = PostForm()
+    return render(request, 'main/post_edit.html', {'form': form})
 
 
 def homepage(request):

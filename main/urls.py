@@ -11,5 +11,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path("view/", views.homepage, name="homepage"),
     path("register/", views.register, name="register"),
-    path("table/", views.ZeroConfigurationDatatableView.as_view(), name="datatableview")
+    path("table/", views.ZeroConfigurationDatatableView.as_view(),
+         name="datatableview"),
+    path('post/new/', views.post_new, name='post_new'),
 ]
