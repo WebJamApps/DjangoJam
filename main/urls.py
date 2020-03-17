@@ -12,6 +12,4 @@ urlpatterns = [
     path("view/", views.homepage, name="homepage"),
     path("register/", views.register, name="register"),
     path("table/", views.ZeroConfigurationDatatableView.as_view(), name="datatableview")
-    # url(r'^my/datatable/data/$',
-    #     OrderListJson.as_view(), name='order_list_json'),
 ]
