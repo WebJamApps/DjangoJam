@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "19591ff5a5c49e7880fc6f100b26f1f9214c21a81a9980edf503456b4dda4fd0"
+            "sha256": "410a035bc1a78100617cd3b64a67b848e577535f75472cd90b9e13e77dac57df"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,6 +38,22 @@
             ],
             "index": "pypi",
             "version": "==3.0.4"
+        },
+        "django-cors-headers": {
+            "hashes": [
+                "sha256:a5960addecc04527ab26617e51b8ed42f0adab4594b24bb0f3c33e2bd3857c3f",
+                "sha256:a785b5f446f6635810776d9f5f5d23e6a2a2f728ea982648370afaf0dfdf2627"
+            ],
+            "index": "pypi",
+            "version": "==3.2.1"
+        },
+        "django-datatable-view": {
+            "hashes": [
+                "sha256:b6fe9d8eb76873dc53a4b73c372f6cf0bfc7d04ea5f78197bda93534d33a8d8a",
+                "sha256:bd3c535b18542609b48b913c5f46b701007cb3e321dbcc16d543711a919521f0"
+            ],
+            "index": "pypi",
+            "version": "==0.9.0"
         },
         "django-tinymce4-lite": {
             "hashes": [
@@ -165,6 +181,14 @@
             "index": "pypi",
             "version": "==7.7.1"
         },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:73ebfe9dbf22e832286dafa60473e4cd239f8592f699aa5adaf10050e6e1823c",
+                "sha256:75bb3f31ea686f1197762692a9ee6a7550b59fc6ca3a1f4b5d7e32fb98e2da2a"
+            ],
+            "index": "pypi",
+            "version": "==2.8.1"
+        },
         "python-dotenv": {
             "hashes": [
                 "sha256:81822227f771e0cab235a2939f0f265954ac4763cafd806d845801c863bf372f",
@@ -180,6 +204,13 @@
             ],
             "index": "pypi",
             "version": "==2019.3"
+        },
+        "six": {
+            "hashes": [
+                "sha256:236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
+                "sha256:8f3cd2e254d8f793e7f3d6d9df77b92252b52637291d0f0da013c76ea2724b6c"
+            ],
+            "version": "==1.14.0"
         },
         "snowballstemmer": {
             "hashes": [

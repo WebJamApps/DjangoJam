@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from rest_framework import viewsets
-
+from datatableview.views import DatatableView
 from .serializers import TutorialSerializer
 from .models import Tutorial
 # Create your views here.
+
+
+class ZeroConfigurationDatatableView(DatatableView):
+    model = Tutorial
 
 
 class TutorialViewSet(viewsets.ModelViewSet):
