@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
@@ -19,7 +19,7 @@ class TutorialViewSet(viewsets.ModelViewSet):
     serializer_class = TutorialSerializer
 
 
-def post_new(request):
+def tutorial_new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -30,7 +30,22 @@ def post_new(request):
             return redirect('/table', pk=post.pk)
     else:
         form = PostForm()
-    return render(request, 'main/post_edit.html', {'form': form})
+    return render(request, 'main/tutorial_edit.html', {'form': form})
+
+
+def tutorial_edit(request, pk):
+    post = get_object_or_404(Tutorial, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('/table', pk=post.pk)
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'main/tutorial_edit.html', {'form': form})
 
 
 def homepage(request):

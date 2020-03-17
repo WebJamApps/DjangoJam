@@ -13,5 +13,6 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("table/", views.ZeroConfigurationDatatableView.as_view(),
          name="datatableview"),
-    path('post/new/', views.post_new, name='post_new'),
+    path('tutorial/new/', views.tutorial_new, name='tutorial_new'),
+    path('tutorial/<int:pk>/edit/', views.tutorial_edit, name='tutorial_edit'),
 ]
