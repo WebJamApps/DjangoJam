@@ -22,15 +22,18 @@
       console.log(action);
       console.log(dataId);
       if (action === 'delete') {
-        $.ajax({
-          headers: {
-            'X-CSRFToken': csrftoken
-          },
-          url: 'http://localhost:8000/tutorials/' + `${dataId}`,
-          type: 'DELETE',
-          success: callback || $.noop,
-          error: errorCallback || $.noop
-        });
+        if (confirm("Are you sure?")) {
+          return $.ajax({
+            headers: {
+              'X-CSRFToken': csrftoken
+            },
+            url: 'http://localhost:8000/tutorials/' + `${dataId}`,
+            type: 'DELETE',
+            success: callback || $.noop,
+            error: errorCallback || $.noop
+          });
+        }
+        return false;
       }
       return window.location.assign('/tutorial/' + dataId + '/edit')
     }
