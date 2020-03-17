@@ -133,7 +133,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
+# TINYMCE_JS_URL = os.path.join(STATIC_URL, "js/tinymce/tinymce.min.js")
+# TINYMCE_JS_ROOT = os.path.join(STATIC_URL, "js/tinymce")
 TINYMCE_DEFAULT_CONFIG = {
     'height': 360,
     'width': 1120,

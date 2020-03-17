@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from rest_framework import viewsets
 from datatableview.views import DatatableView
 from .serializers import TutorialSerializer
 from .models import Tutorial
+from .forms import PostForm
 # Create your views here.
 
 
@@ -15,6 +17,20 @@ class ZeroConfigurationDatatableView(DatatableView):
 class TutorialViewSet(viewsets.ModelViewSet):
     queryset = Tutorial.objects.all().order_by('tutorial_title')
     serializer_class = TutorialSerializer
+
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('/table', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'main/post_edit.html', {'form': form})
 
 
 def homepage(request):
