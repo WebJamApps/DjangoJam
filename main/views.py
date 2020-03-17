@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import logout, authenticate, login
 from rest_framework import viewsets
@@ -19,7 +20,16 @@ class TutorialViewSet(viewsets.ModelViewSet):
 
 
 def post_new(request):
-    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('/table', pk=post.pk)
+    else:
+        form = PostForm()
     return render(request, 'main/post_edit.html', {'form': form})
 
 
