@@ -6,46 +6,26 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
   <!-- Load js for initializing tables via their server-side options -->
   <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
   <script>
-    $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-        if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
-          function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-              var cookies = document.cookie.split(';');
-              for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-                }
-              }
-            }
-            return cookieValue;
-          }
-          if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-            // Only send the token to relative URLs i.e. locally.
-            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-          }
-        }
-      }
-    });
     var callback = function() {
-      console.log('deleted successfully')
+      console.log('deleted successfully');
+      window.location.reload();
     }
     var errorCallback = function() {
       console.log('delete failed')
     }
     var cl = function(action, dataId) {
+      var csrftoken = Cookies.get('csrftoken');
       console.log(action);
       console.log(dataId);
       if (action === 'delete') {
         $.ajax({
+          headers: {
+            'X-CSRFToken': csrftoken
+          },
           url: 'http://localhost:8000/tutorials/' + `${dataId}`,
           type: 'DELETE',
           success: callback || $.noop,
@@ -62,7 +42,7 @@
           // The `data` parameter refers to the data for the cell.
           // The `rows`argument is an object representing all the data for the current row.
           "render": function(data, type, row) {
-            return "<button onclick='cl(\"edit\"," + row[0] + ");' class='btn-edit'>Edit</button > | <button class='btn-delete' onclick='cl(\"delete\"," + row[0] + ");'>Delete</button>";
+            return "<div><button onclick='cl(\"edit\"," + row[0] + ");' class='btn-edit'>Edit</button ></br></br><button class='btn-delete' onclick='cl(\"delete\"," + row[0] + ");'>Delete</button></div>";
           },
           "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
         }]
