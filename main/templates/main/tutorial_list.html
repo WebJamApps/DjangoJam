@@ -1,74 +1,71 @@
+{% extends 'main/header.html' %}
 {% load static %}
-<html>
-
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <!-- Load dependencies -->
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
-  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
-  <!-- Load js for initializing tables via their server-side options -->
-  <script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
-  <script>
-    var callback = function() {
-      console.log('deleted successfully');
-      window.location.reload();
-    }
-    var errorCallback = function() {
-      console.log('delete failed')
-    }
-    var cl = function(action, dataId) {
-      var csrftoken = Cookies.get('csrftoken');
-      console.log(action);
-      console.log(dataId);
-      if (action === 'delete') {
-        if (confirm("Are you sure?")) {
-          return $.ajax({
-            headers: {
-              'X-CSRFToken': csrftoken
-            },
-            url: 'http://localhost:8000/tutorials/' + `${dataId}`,
-            type: 'DELETE',
-            success: callback || $.noop,
-            error: errorCallback || $.noop
-          });
-        }
-        return false;
-      }
-      return window.location.assign('/tutorial/' + dataId + '/edit')
-    }
-
-  </script>
-  <script type="text/javascript">
-    $(function() {
-      datatableview.initialize($('.datatable'), {
-        "columnDefs": [{
-          // The `data` parameter refers to the data for the cell.
-          // The `rows`argument is an object representing all the data for the current row.
-          "render": function(data, type, row) {
-            return "<div><button onclick='cl(\"edit\"," + row[0] + ");' class='btn-edit'>Edit</button ></br></br><button class='btn-delete' onclick='cl(\"delete\"," + row[0] + ");'>Delete</button></div>";
+{% block content %}
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+<!-- Load dependencies -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<!-- Load js for initializing tables via their server-side options -->
+<script type="text/javascript" charset="utf8" src="{% static 'js/datatableview.js' %}"></script>
+<script>
+  var callback = function() {
+    console.log('deleted successfully');
+    window.location.reload();
+  }
+  var errorCallback = function() {
+    console.log('delete failed')
+  }
+  var cl = function(action, dataId) {
+    var csrftoken = Cookies.get('csrftoken');
+    console.log(action);
+    console.log(dataId);
+    if (action === 'delete') {
+      if (confirm("Are you sure?")) {
+        return $.ajax({
+          headers: {
+            'X-CSRFToken': csrftoken
           },
-          "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
-        }]
-      });
+          url: 'http://localhost:8000/tutorials/' + `${dataId}`,
+          type: 'DELETE',
+          success: callback || $.noop,
+          error: errorCallback || $.noop
+        });
+      }
+      return false;
+    }
+    return window.location.assign('/tutorial/' + dataId + '/edit')
+  }
+
+</script>
+<script type="text/javascript">
+  $(function() {
+    datatableview.initialize($('.datatable'), {
+      "columnDefs": [{
+        // The `data` parameter refers to the data for the cell.
+        // The `rows`argument is an object representing all the data for the current row.
+        "render": function(data, type, row) {
+          return "<div><button onclick='cl(\"edit\"," + row[0] + ");' class='btn-edit'>Edit</button ></br></br><button class='btn-delete' onclick='cl(\"delete\"," + row[0] + ");'>Delete</button></div>";
+        },
+        "targets": -1 // -1 is the last column, 0 the first, 1 the second, etc.
+      }]
     });
+  });
 
-  </script>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-</head>
+</script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- </head>
 
-<body>
-  <!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
-  {{ datatable }}
-  <script>
-    var tr = document.getElementsByTagName("TR")[0].innerHTML;
-    tr = tr + '<th><strong>Modify</strong></th>';
-    document.getElementsByTagName("TR")[0].innerHTML = tr;
+<body> -->
+<!-- Render the table skeleton, includes the .datatable class for the on-ready initializer. -->
+{{ datatable }}
+<script>
+  var tr = document.getElementsByTagName("TR")[0].innerHTML;
+  tr = tr + '<th><strong>Modify</strong></th>';
+  document.getElementsByTagName("TR")[0].innerHTML = tr;
 
-  </script>
-</body>
-
-</html>
+</script>
+{% endblock %}
