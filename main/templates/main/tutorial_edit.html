@@ -1,10 +1,20 @@
 {% extends 'main/header.html' %}
 <!-- {% load static %} -->
 {% block content %}
+
 <!-- <script src="{% static 'tinymce/js/prism.js' %}"></script> -->
 <h2>Create/Update Tutorial</h2>
 <form method="POST" class="post-form">{% csrf_token %}
   {{ form.as_p }}
   <button type="submit" class="save btn btn-default">Save</button>
 </form>
+<script>
+  $(function() {
+    // $.datetimepicker.setLocale('en');
+    $("#id_tutorial_published").datetimepicker({
+      format: 'd/m/Y H:i',
+    });
+  });
+
+</script>
 {% endblock %}
